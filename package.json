@@ -44,7 +44,6 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node ./node_modules/fit-commit-js/lib/hook.js .git/COMMIT_EDITMSG",
       "pre-commit": "npm run lint",
       "pre-push": "npm test"
     }
@@ -58,7 +57,6 @@
     "@types/pg": "^8.6.0",
     "@types/sinon": "^9.0.11",
     "ava": "^3.15.0",
-    "fit-commit-js": "^0.3.2",
     "husky": "^3.1.0",
     "prettier": "^2.3.1",
     "sinon": "^9.2.4",
