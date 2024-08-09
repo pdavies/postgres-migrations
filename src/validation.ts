@@ -27,7 +27,7 @@ export function maybeValidateMigrationHashes(
   const invalidHashes = migrations.filter(invalidHash)
   if (invalidHashes.length > 0) {
     // Someone has altered one or more migrations which has already run - gasp!
-    const invalidFiles = invalidHashes.map(({ fileName }) => fileName)
+    const invalidFiles = invalidHashes.map(({fileName}) => fileName)
 
     if (process.env.NODE_ENV === "development") {
       console.error(`Hashes don't match for migrations '${invalidFiles}' but allowing 
