@@ -14,7 +14,7 @@ export function validateMigrationOrdering(migrations: Array<Migration>) {
 }
 
 /** Assert hashes match */
-export function validateMigrationHashes(
+export function maybeValidateMigrationHashes(
   migrations: Array<Migration>,
   appliedMigrations: Record<number, Migration | undefined>,
 ) {
@@ -27,8 +27,14 @@ export function validateMigrationHashes(
   const invalidHashes = migrations.filter(invalidHash)
   if (invalidHashes.length > 0) {
     // Someone has altered one or more migrations which has already run - gasp!
-    const invalidFiles = invalidHashes.map(({fileName}) => fileName)
-    throw new Error(`Hashes don't match for migrations '${invalidFiles}'.
+    const invalidFiles = invalidHashes.map(({ fileName }) => fileName)
+
+    if (process.env.NODE_ENV === "development") {
+      console.error(`Hashes don't match for migrations '${invalidFiles}' but allowing 
+as NODE_ENV is 'development'.`)
+    } else {
+      throw new Error(`Hashes don't match for migrations '${invalidFiles}'. 
 This means that the scripts have changed since it was applied.`)
+    }
   }
 }
