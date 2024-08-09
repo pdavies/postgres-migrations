@@ -11,7 +11,7 @@ import {
   Migration,
   MigrationError,
 } from "./types"
-import {validateMigrationHashes} from "./validation"
+import {maybeValidateMigrationHashes} from "./validation"
 import {withConnection} from "./with-connection"
 import {withAdvisoryLock} from "./with-lock"
 
@@ -119,7 +119,7 @@ function runMigrations(intendedMigrations: Array<Migration>, log: Logger) {
         log,
       )
 
-      validateMigrationHashes(intendedMigrations, appliedMigrations)
+      maybeValidateMigrationHashes(intendedMigrations, appliedMigrations)
 
       const migrationsToRun = filterMigrations(
         intendedMigrations,
