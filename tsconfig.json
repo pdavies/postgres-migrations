@@ -1,4 +1,20 @@
 {
-  "extends": "./tsconfig-base.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
+    "typeRoots": ["./typings", "./node_modules/@types"],
+    "outDir": "./dist",
+    "target": "ES2021",
+    "declaration": true,
+    "module": "commonjs",
+    "lib": ["ES2021"],
+    "noUnusedLocals": true,
+    "noErrorTruncation": true,
+    "pretty": true,
+    "strict": true
+  },
   "include": ["./src/**/*"]
 }
